@@ -116,7 +116,7 @@ class SetCard extends StatelessWidget {
                     ),
                     // Menú de opciones
                     if (onEdit != null || onDelete != null)
-                      Container(
+                      DecoratedBox(
                         decoration: BoxDecoration(
                           color: Colors.grey[100],
                           borderRadius: BorderRadius.circular(12),

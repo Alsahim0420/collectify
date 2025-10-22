@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Title;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
 import 'package:collectify/presentation/state/collection/collection_state.dart';
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         leading: widget.selectedCollectionId != null
             ? IconButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.go('/'),
                 icon: const Icon(Icons.arrow_back),
               )
             : null,
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/');
+              context.go('/');
             },
             icon: const Icon(Icons.collections),
           ),
@@ -215,7 +216,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 16),
             // Subtítulo
             Subtitle(
-              'Comienza agregando tu primer set de LEGO y construye la colección de tus sueños',
+              'Comienza agregando tu primer set y construye la colección de tus sueños',
               color: Colors.grey[600],
               textAlign: TextAlign.center,
             ),
@@ -250,12 +251,12 @@ class _HomePageState extends State<HomePage> {
                         size: 20,
                       ),
                       const SizedBox(width: 8),
-                      Title('Consejos para empezar', color: Colors.blue[800]),
+                      Title('Consejos para organizar', color: Colors.blue[800]),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Body(
-                    '• Agrega el nombre completo del set\n• Incluye el número oficial de LEGO\n• Organiza por temas (Star Wars, City, etc.)\n• Añade notas personales sobre tu experiencia',
+                    '• Agrega el nombre completo del set\n• Incluye el número de serie LEGO\n• Organiza por temas (Star Wars, Technic, etc.)\n• Añade notas personales sobre tu experiencia',
                     color: Colors.blue[700],
                   ),
                 ],
@@ -370,7 +371,7 @@ class _HomePageState extends State<HomePage> {
               color: Theme.of(context).colorScheme.error,
             ),
             const SizedBox(height: 16),
-            Title('Error al cargar la colección'),
+            const Title('Error al cargar la colección'),
             const SizedBox(height: 8),
             Subtitle(
               message,
@@ -449,7 +450,7 @@ class _HomePageState extends State<HomePage> {
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(height: 16),
-            Title('No se encontraron resultados'),
+            const Title('No se encontraron resultados'),
             const SizedBox(height: 8),
             Subtitle(
               'Intenta con otros términos de búsqueda',

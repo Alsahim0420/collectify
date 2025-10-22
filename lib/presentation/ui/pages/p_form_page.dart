@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
-import 'package:collectify/domain/entities/collection.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
-import 'package:collectify/presentation/state/collection_selection/collection_selection_bloc.dart';
-import 'package:collectify/presentation/state/collection_selection/collection_selection_event.dart';
-import 'package:collectify/presentation/state/collection_selection/collection_selection_state.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key, this.existingSet});
@@ -23,7 +19,6 @@ class _FormPageState extends State<FormPage> {
   late TextEditingController _themeCtrl;
   late TextEditingController _piecesCtrl;
   late TextEditingController _notesCtrl;
-  String? _selectedCollectionId;
 
   @override
   void initState() {
@@ -37,10 +32,6 @@ class _FormPageState extends State<FormPage> {
       text: widget.existingSet?.pieces.toString() ?? '',
     );
     _notesCtrl = TextEditingController(text: widget.existingSet?.notes ?? '');
-    _selectedCollectionId = widget.existingSet?.collectionId ?? 'default';
-
-    // Cargar colecciones
-    context.read<CollectionSelectionBloc>().add(LoadCollections());
   }
 
   @override
@@ -55,12 +46,9 @@ class _FormPageState extends State<FormPage> {
 
   void _save() {
     if (!_formKey.currentState!.validate()) return;
-    if (_selectedCollectionId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor selecciona una colección')),
-      );
-      return;
-    }
+
+    // Usar una colección por defecto para LEGO
+    const defaultCollectionId = 'lego-default';
 
     if (widget.existingSet == null) {
       context.read<CollectionBloc>().add(
@@ -70,7 +58,7 @@ class _FormPageState extends State<FormPage> {
           _themeCtrl.text,
           int.tryParse(_piecesCtrl.text) ?? 0,
           _notesCtrl.text,
-          _selectedCollectionId!,
+          defaultCollectionId,
         ),
       );
     } else {
@@ -82,7 +70,7 @@ class _FormPageState extends State<FormPage> {
           _themeCtrl.text,
           int.tryParse(_piecesCtrl.text) ?? 0,
           _notesCtrl.text,
-          _selectedCollectionId!,
+          defaultCollectionId,
         ),
       );
     }
@@ -156,7 +144,9 @@ class _FormPageState extends State<FormPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.existingSet == null ? 'Nuevo Set LEGO' : 'Editar Set',
+                  widget.existingSet == null
+                      ? 'Nuevo Set LEGO'
+                      : 'Editar Set LEGO',
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -217,8 +207,6 @@ class _FormPageState extends State<FormPage> {
           ],
         ),
         const SizedBox(height: 20),
-        _buildCollectionSelector(context),
-        const SizedBox(height: 20),
         _buildTextField(
           context,
           controller: _themeCtrl,
@@ -236,67 +224,6 @@ class _FormPageState extends State<FormPage> {
           maxLines: 3,
         ),
       ],
-    );
-  }
-
-  Widget _buildCollectionSelector(BuildContext context) {
-    return BlocBuilder<CollectionSelectionBloc, CollectionSelectionState>(
-      builder: (context, state) {
-        if (state is CollectionSelectionLoaded) {
-          return DropdownButtonFormField<String>(
-            value: _selectedCollectionId,
-            decoration: InputDecoration(
-              labelText: 'Colección',
-              prefixIcon: const Icon(Icons.collections),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 2,
-                ),
-              ),
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.surface,
-            ),
-            items: state.collections.map((Collection collection) {
-              return DropdownMenuItem<String>(
-                value: collection.id,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: Color(collection.color),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(child: Text(collection.name)),
-                  ],
-                ),
-              );
-            }).toList(),
-            onChanged: (String? value) {
-              setState(() {
-                _selectedCollectionId = value;
-              });
-            },
-            validator: (value) =>
-                value == null ? 'Selecciona una colección' : null,
-          );
-        }
-        return const CircularProgressIndicator();
-      },
     );
   }
 

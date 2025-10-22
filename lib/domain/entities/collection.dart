@@ -9,6 +9,16 @@ class Collection extends Equatable {
     required this.createdAt,
     this.setCount = 0,
   });
+  factory Collection.fromJson(Map<String, dynamic> json) {
+    return Collection(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      color: json['color'] as int,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      setCount: json['setCount'] as int? ?? 0,
+    );
+  }
 
   final String id;
   final String name;
@@ -30,17 +40,6 @@ class Collection extends Equatable {
     createdAt: createdAt,
     setCount: setCount ?? this.setCount,
   );
-
-  factory Collection.fromJson(Map<String, dynamic> json) {
-    return Collection(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      color: json['color'] as int,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      setCount: json['setCount'] as int? ?? 0,
-    );
-  }
 
   Map<String, dynamic> toJson() {
     return {

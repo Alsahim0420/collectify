@@ -13,16 +13,7 @@ class CollectionLocalDataSourceImpl implements CollectionLocalDataSource {
   Future<List<Collection>> getCollections() async {
     final jsonString = _prefs.getString(_collectionsKey);
     if (jsonString == null) {
-      // Crear colección por defecto si no existe ninguna
-      final defaultCollection = Collection(
-        id: 'default',
-        name: 'Mi Colección Principal',
-        description: 'Colección principal de sets LEGO',
-        color: 0xFF2196F3, // Azul
-        createdAt: DateTime.now(),
-      );
-      await addCollection(defaultCollection);
-      return [defaultCollection];
+      return [];
     }
 
     final List<dynamic> jsonList = json.decode(jsonString);
@@ -31,14 +22,30 @@ class CollectionLocalDataSourceImpl implements CollectionLocalDataSource {
 
   @override
   Future<void> addCollection(Collection collection) async {
-    final collections = await getCollections();
+    final jsonString = _prefs.getString(_collectionsKey);
+    List<Collection> collections;
+
+    if (jsonString == null) {
+      collections = [];
+    } else {
+      final List<dynamic> jsonList = json.decode(jsonString);
+      collections = jsonList.map((json) => Collection.fromJson(json)).toList();
+    }
+
     collections.add(collection);
     await _saveCollections(collections);
   }
 
   @override
   Future<void> deleteCollection(String id) async {
-    final collections = await getCollections();
+    final jsonString = _prefs.getString(_collectionsKey);
+    if (jsonString == null) return;
+
+    final List<dynamic> jsonList = json.decode(jsonString);
+    final collections = jsonList
+        .map((json) => Collection.fromJson(json))
+        .toList();
+
     collections.removeWhere((collection) => collection.id == id);
     await _saveCollections(collections);
   }

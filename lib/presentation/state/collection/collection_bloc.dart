@@ -27,23 +27,19 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
   final _uuid = const Uuid();
 
   Future<void> _onLoad(LoadItems e, Emitter<CollectionState> emit) async {
-    print('🔄 BLoC: Cargando items...');
     emit(const CollectionLoading());
     final res = await _getLegoSets();
     res.fold(
       (l) {
-        print('❌ BLoC: Error al cargar: ${l.message}');
         emit(CollectionError(l.message));
       },
       (r) {
-        print('✅ BLoC: Cargados ${r.length} items exitosamente');
         emit(CollectionLoaded(r));
       },
     );
   }
 
   Future<void> _onAdd(AddItemEvent e, Emitter<CollectionState> emit) async {
-    print('➕ BLoC: Agregando nuevo set: ${e.name}');
     final newSet = LegoSet(
       id: _uuid.v4(),
       name: e.name,
@@ -54,9 +50,7 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
       acquiredAt: DateTime.now(),
       collectionId: e.collectionId,
     );
-    print('💾 BLoC: Guardando set con ID: ${newSet.id}');
     await _addLegoSet(newSet);
-    print('🔄 BLoC: Recargando lista después de agregar');
     add(LoadItems());
   }
 

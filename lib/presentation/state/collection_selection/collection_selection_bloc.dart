@@ -28,18 +28,13 @@ class CollectionSelectionBloc
     LoadCollections e,
     Emitter<CollectionSelectionState> emit,
   ) async {
-    print('🔄 Collection BLoC: Cargando colecciones...');
     emit(CollectionSelectionLoading());
     final res = await _getCollections();
     res.fold(
       (l) {
-        print('❌ Collection BLoC: Error al cargar: ${l.message}');
         emit(CollectionSelectionError(l.message));
       },
       (r) {
-        print(
-          '✅ Collection BLoC: Cargadas ${r.length} colecciones exitosamente',
-        );
         emit(CollectionSelectionLoaded(collections: r));
       },
     );
@@ -49,7 +44,6 @@ class CollectionSelectionBloc
     AddCollectionEvent e,
     Emitter<CollectionSelectionState> emit,
   ) async {
-    print('➕ Collection BLoC: Agregando nueva colección: ${e.name}');
     final newCollection = Collection(
       id: _uuid.v4(),
       name: e.name,
@@ -57,11 +51,7 @@ class CollectionSelectionBloc
       color: e.color,
       createdAt: DateTime.now(),
     );
-    print(
-      '💾 Collection BLoC: Guardando colección con ID: ${newCollection.id}',
-    );
     await _addCollection(newCollection);
-    print('🔄 Collection BLoC: Recargando lista después de agregar');
     add(LoadCollections());
   }
 
