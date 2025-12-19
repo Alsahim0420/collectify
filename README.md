@@ -111,36 +111,36 @@ flutter run
 ## 🛠️ Tecnologías y Arquitectura
 
 ### **Frontend & UI**
-- **Flutter 3.32.8** - Framework principal ⭐
+- **Flutter 3.32.8** - Framework principal 
 - **Material Design 3** - Sistema de diseño moderno
-- **Go Router 14.2.0** - Navegación declarativa ⭐
+- **Go Router 14.2.0** - Navegación declarativa 
 - **Responsive Design** - Adaptable a diferentes pantallas
 
 ### **Gestión de Estado**
-- **Flutter Bloc 8.1.6** - State management reactivo ⭐
+- **Flutter Bloc 8.1.6** - State management reactivo 
 - **Equatable 2.0.5** - Comparación de objetos
 - **Dartz 0.10.1** - Programación funcional
 - **Clean Architecture** - Separación de responsabilidades
 
 ### **Almacenamiento Local**
-- **Hive 2.2.3** - Base de datos local rápida ⭐
-- **Hive Flutter 1.1.0** - Integración con Flutter ⭐
-- **Hive Generator 2.0.1** - Generación de código ⭐
+- **Hive 2.2.3** - Base de datos local rápida 
+- **Hive Flutter 1.1.0** - Integración con Flutter 
+- **Hive Generator 2.0.1** - Generación de código 
 - **Shared Preferences 2.2.2** - Configuraciones simples
 - **Type Adapters** - Serialización personalizada
 - **Offline-First** - Datos persistentes localmente
 
 ### **Inyección de Dependencias**
-- **Get It 7.7.0** - Service locator pattern ⭐
+- **Get It 7.7.0** - Service locator pattern 
 - **Dependency Injection** - Inyección de dependencias
 - **Service Locator** - Patrón de localización de servicios
 - **Singleton Pattern** - Instancias únicas
 
 ### **Serialización y Utilidades**
-- **JSON Annotation 4.9.0** - Anotaciones para JSON ⭐
+- **JSON Annotation 4.9.0** - Anotaciones para JSON 
 - **JSON Serializable 6.9.0** - Generación de serializadores
 - **UUID 4.5.1** - Generación de identificadores únicos
-- **Build Runner 2.4.13** - Generación de código ⭐
+- **Build Runner 2.4.13** - Generación de código 
 
 ---
 
@@ -167,9 +167,10 @@ lib/
 └── presentation/                  # Capa de presentación
     ├── state/                     # Gestión de estado (BLoC)
     └── ui/                        # Interfaz de usuario
-        ├── atoms/                 # Componentes atómicos
-        ├── molecules/             # Componentes moleculares
-        └── pages/                 # Páginas de la aplicación
+        ├── atoms/                 # Componentes atómicos (prefijo: a_)
+        ├── molecules/             # Componentes moleculares (prefijo: m_)
+        ├── organisms/             # Componentes orgánicos (prefijo: o_)
+        └── pages/                 # Páginas de la aplicación (prefijo: p_)
 ```
 
 ### **Patrón de Diseño**
@@ -178,6 +179,141 @@ lib/
 - **BLoC Pattern** - Gestión de estado reactiva
 - **Dependency Injection** - Inyección de dependencias
 - **Atomic Design** - Componentes modulares
+
+### **🎨 Atomic Design - Sistema de Componentes**
+
+El proyecto utiliza **Atomic Design** para organizar los componentes de UI de manera jerárquica y escalable. Esta metodología divide los componentes en 5 niveles, desde los más simples hasta los más complejos.
+
+#### **Estructura de Nomenclatura**
+
+Cada componente sigue una convención de nombres con prefijos que indican su nivel en la jerarquía:
+
+- **`a_`** → **Atoms** (Átomos) - Componentes básicos e indivisibles
+- **`m_`** → **Molecules** (Moléculas) - Combinaciones de átomos
+- **`o_`** → **Organisms** (Organismos) - Combinaciones de moléculas y átomos
+- **`p_`** → **Pages** (Páginas) - Vistas completas de la aplicación
+
+#### **📦 Niveles de Atomic Design**
+
+##### **1. Atoms (Átomos) - Prefijo `a_`**
+Los componentes más básicos e indivisibles de la interfaz. Son elementos simples que no pueden descomponerse más.
+
+**Ejemplos en el proyecto:**
+- `a_text.dart` - Componente de texto reutilizable
+- `a_chip.dart` - Chip individual para etiquetas
+- `a_text_field.dart` - Campo de texto básico
+- `a_primary_button.dart` - Botón primario
+- `a_number_field.dart` - Campo numérico
+- `a_gap.dart` - Espaciador
+
+**Características:**
+- ✅ Componentes simples y reutilizables
+- ✅ Sin lógica de negocio compleja
+- ✅ Altamente reutilizables en toda la app
+- ✅ Props mínimas y bien definidas
+
+##### **2. Molecules (Moléculas) - Prefijo `m_`**
+Combinaciones de átomos que forman componentes más complejos pero aún relativamente simples.
+
+**Ejemplos en el proyecto:**
+- `m_search_bar.dart` - Barra de búsqueda (combina `a_text_field` + iconos)
+- `m_set_card.dart` - Tarjeta de set LEGO (combina múltiples átomos)
+- `m_category_selector.dart` - Selector de categorías (combina `a_chip` múltiples)
+- `m_lego_theme_selector.dart` - Selector de temas LEGO
+- `m_confirm_dialog.dart` - Diálogo de confirmación
+
+**Características:**
+- ✅ Combinan 2 o más átomos
+- ✅ Tienen una funcionalidad específica
+- ✅ Pueden tener estado local simple
+- ✅ Reutilizables en diferentes contextos
+
+##### **3. Organisms (Organismos) - Prefijo `o_`**
+Combinaciones complejas de moléculas y átomos que forman secciones completas de la interfaz.
+
+**Ejemplos en el proyecto:**
+- `o_search_section.dart` - Sección completa de búsqueda (combina `m_search_bar` + chips de búsquedas recientes)
+
+**Características:**
+- ✅ Combinan múltiples moléculas y átomos
+- ✅ Representan secciones completas de UI
+- ✅ Pueden tener lógica de estado más compleja
+- ✅ Menos reutilizables que moléculas
+
+##### **4. Pages (Páginas) - Prefijo `p_`**
+Vistas completas de la aplicación que combinan organismos, moléculas y átomos para formar pantallas funcionales.
+
+**Ejemplos en el proyecto:**
+- `p_home_page.dart` - Página principal con lista de sets
+- `p_collections_page.dart` - Página de colecciones
+- `p_form_page.dart` - Página de formulario para agregar/editar sets
+- `p_details_page.dart` - Página de detalles de un set
+
+**Características:**
+- ✅ Vistas completas y funcionales
+- ✅ Combinan múltiples organismos, moléculas y átomos
+- ✅ Conectan con la lógica de negocio (BLoC)
+- ✅ Manejan navegación y estado global
+- ✅ Únicas en la aplicación
+
+#### **📋 Convenciones de Nomenclatura**
+
+```
+lib/presentation/ui/
+├── atoms/
+│   ├── a_text.dart              # ✅ Correcto
+│   └── text.dart                # ❌ Incorrecto (falta prefijo)
+├── molecules/
+│   ├── m_search_bar.dart        # ✅ Correcto
+│   └── search_bar.dart           # ❌ Incorrecto (falta prefijo)
+├── organisms/
+│   ├── o_search_section.dart    # ✅ Correcto
+│   └── search_section.dart       # ❌ Incorrecto (falta prefijo)
+└── pages/
+    ├── p_home_page.dart          # ✅ Correcto
+    └── home_page.dart            # ❌ Incorrecto (falta prefijo)
+```
+
+#### **🔄 Flujo de Composición**
+
+```
+Atoms (a_) 
+    ↓
+Molecules (m_) → Usan Atoms
+    ↓
+Organisms (o_) → Usan Molecules + Atoms
+    ↓
+Pages (p_) → Usan Organisms + Molecules + Atoms
+```
+
+#### **💡 Beneficios de Atomic Design**
+
+1. **Escalabilidad** - Fácil agregar nuevos componentes siguiendo la jerarquía
+2. **Reutilización** - Componentes atómicos reutilizables en múltiples contextos
+3. **Mantenibilidad** - Estructura clara y organizada
+4. **Consistencia** - Diseño coherente en toda la aplicación
+5. **Colaboración** - Fácil para equipos trabajar en paralelo
+6. **Testing** - Más fácil testear componentes pequeños y aislados
+
+#### **📝 Ejemplo Práctico**
+
+```dart
+// Atom (a_text.dart)
+class Title extends StatelessWidget {
+  final String text;
+  // ...
+}
+
+// Molecule (m_set_card.dart) - Usa átomos
+class SetCard extends StatelessWidget {
+  // Usa: Title, Chip, Icon, etc.
+}
+
+// Page (p_home_page.dart) - Usa moléculas y organismos
+class HomePage extends StatelessWidget {
+  // Usa: SetCard, SearchSection, etc.
+}
+```
 
 ---
 
@@ -298,10 +434,10 @@ flutter build ios --release
 ## 🧪 Testing y Calidad
 
 ### **Testing Unitario**
-- **Flutter Lints 5.0.0** - Reglas de calidad de código ⭐
-- **Build Runner 2.4.13** - Generación de código ⭐
-- **Bloc Test 9.1.7** - Testing de BLoCs ⭐
-- **Mocktail 1.0.3** - Mocks para testing ⭐
+- **Flutter Lints 5.0.0** - Reglas de calidad de código 
+- **Build Runner 2.4.13** - Generación de código 
+- **Bloc Test 9.1.7** - Testing de BLoCs 
+- **Mocktail 1.0.3** - Mocks para testing 
 - **Models** con validaciones automáticas
 - **Repository** con tests de integración
 
@@ -338,4 +474,4 @@ flutter build ios --release
 - **LinkedIn**: [Pablo Andrés Melo Carvajal](https://www.linkedin.com/in/pablo-andres-melo/)
 - **Portfolio**: [alsahim0420.github.io](https://alsahim0420.github.io/portfolio/)
 
-**⭐ Si te gusta Collectify, ¡dale una estrella al repositorio!**
+** Si te gusta Collectify, ¡dale una estrella al repositorio!**
