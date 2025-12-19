@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
+import 'package:collectify/presentation/ui/molecules/m_lego_theme_selector.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key, this.existingSet});
@@ -16,9 +17,10 @@ class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameCtrl;
   late TextEditingController _setNumberCtrl;
-  late TextEditingController _themeCtrl;
+  String? _selectedTheme;
   late TextEditingController _piecesCtrl;
   late TextEditingController _notesCtrl;
+  final TextEditingController _themeSearchController = TextEditingController();
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _FormPageState extends State<FormPage> {
     _setNumberCtrl = TextEditingController(
       text: widget.existingSet?.setNumber.toString() ?? '',
     );
-    _themeCtrl = TextEditingController(text: widget.existingSet?.theme ?? '');
+    _selectedTheme = widget.existingSet?.theme;
     _piecesCtrl = TextEditingController(
       text: widget.existingSet?.pieces.toString() ?? '',
     );
@@ -38,9 +40,9 @@ class _FormPageState extends State<FormPage> {
   void dispose() {
     _nameCtrl.dispose();
     _setNumberCtrl.dispose();
-    _themeCtrl.dispose();
     _piecesCtrl.dispose();
     _notesCtrl.dispose();
+    _themeSearchController.dispose();
     super.dispose();
   }
 
@@ -55,7 +57,7 @@ class _FormPageState extends State<FormPage> {
         AddItemEvent(
           _nameCtrl.text,
           int.tryParse(_setNumberCtrl.text) ?? 0,
-          _themeCtrl.text,
+          _selectedTheme ?? '',
           int.tryParse(_piecesCtrl.text) ?? 0,
           _notesCtrl.text,
           defaultCollectionId,
@@ -67,7 +69,7 @@ class _FormPageState extends State<FormPage> {
           widget.existingSet!.id,
           _nameCtrl.text,
           int.tryParse(_setNumberCtrl.text) ?? 0,
-          _themeCtrl.text,
+          _selectedTheme ?? '',
           int.tryParse(_piecesCtrl.text) ?? 0,
           _notesCtrl.text,
           defaultCollectionId,
@@ -207,13 +209,7 @@ class _FormPageState extends State<FormPage> {
           ],
         ),
         const SizedBox(height: 20),
-        _buildTextField(
-          context,
-          controller: _themeCtrl,
-          label: 'Tema',
-          hint: 'Ej: Star Wars, Technic, City...',
-          icon: Icons.category,
-        ),
+        _buildThemeDropdown(context),
         const SizedBox(height: 20),
         _buildTextField(
           context,
@@ -261,6 +257,178 @@ class _FormPageState extends State<FormPage> {
         filled: true,
         fillColor: Theme.of(context).colorScheme.surface,
       ),
+    );
+  }
+
+  Widget _buildThemeDropdown(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return InkWell(
+      onTap: () => _showThemeSearchDialog(context),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: 'Tema',
+          hintText: _selectedTheme ?? 'Selecciona un tema LEGO',
+          prefixIcon: const Icon(Icons.category),
+          suffixIcon: const Icon(Icons.arrow_drop_down),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: colorScheme.outline),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: 2,
+            ),
+          ),
+          filled: true,
+          fillColor: colorScheme.surface,
+        ),
+        child: Text(
+          _selectedTheme ?? '',
+          style: theme.textTheme.bodyLarge,
+        ),
+      ),
+    );
+  }
+
+  void _showThemeSearchDialog(BuildContext context) {
+    _themeSearchController.clear();
+    List<String> filteredThemes = List.from(LegoThemeSelector.legoThemes);
+    String searchText = '';
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              title: const Text('Buscar Tema LEGO'),
+              content: SizedBox(
+                width: double.maxFinite,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: _themeSearchController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: 'Buscar tema...',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: searchText.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _themeSearchController.clear();
+                                  setDialogState(() {
+                                    searchText = '';
+                                    filteredThemes =
+                                        List.from(LegoThemeSelector.legoThemes);
+                                  });
+                                },
+                              )
+                            : null,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setDialogState(() {
+                          searchText = value;
+                          final searchQuery = value.toLowerCase();
+                          filteredThemes = LegoThemeSelector.legoThemes
+                              .where((theme) => theme
+                                  .toLowerCase()
+                                  .contains(searchQuery))
+                              .toList();
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Flexible(
+                      child: SizedBox(
+                        height: 300,
+                        child: filteredThemes.isEmpty
+                            ? Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.search_off,
+                                      size: 48,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'No se encontraron temas',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurfaceVariant,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: filteredThemes.length,
+                                itemBuilder: (context, index) {
+                                  final themeName = filteredThemes[index];
+                                  final isSelected =
+                                      _selectedTheme == themeName;
+                                  return ListTile(
+                                    title: Text(themeName),
+                                    selected: isSelected,
+                                    selectedTileColor: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                    leading: isSelected
+                                        ? Icon(
+                                            Icons.check_circle,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          )
+                                        : const Icon(Icons.circle_outlined),
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedTheme = themeName;
+                                      });
+                                      _themeSearchController.clear();
+                                      Navigator.pop(dialogContext);
+                                    },
+                                  );
+                                },
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    _themeSearchController.clear();
+                    Navigator.pop(dialogContext);
+                  },
+                  child: const Text('Cancelar'),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 

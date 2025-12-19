@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart' hide Chip;
-import 'package:collectify/presentation/ui/atoms/a_chip.dart';
+import 'package:flutter/material.dart';
 
 class LegoThemeSelector extends StatelessWidget {
   const LegoThemeSelector({
@@ -45,21 +44,48 @@ class LegoThemeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Tema LEGO', style: Theme.of(context).textTheme.titleSmall),
+        Text('Tema LEGO', style: theme.textTheme.titleSmall),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: legoThemes.map((theme) {
-            return Chip(
-              label: theme,
-              isSelected: selectedTheme == theme,
-              onTap: () => onThemeSelected(theme),
+        DropdownButtonFormField<String>(
+          value: selectedTheme,
+          decoration: InputDecoration(
+            labelText: 'Selecciona un tema',
+            hintText: 'Elige un tema LEGO',
+            prefixIcon: const Icon(Icons.category),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: colorScheme.outline),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: colorScheme.primary,
+                width: 2,
+              ),
+            ),
+            filled: true,
+            fillColor: colorScheme.surface,
+          ),
+          items: legoThemes.map((theme) {
+            return DropdownMenuItem<String>(
+              value: theme,
+              child: Text(theme),
             );
           }).toList(),
+          onChanged: (value) {
+            if (value != null) {
+              onThemeSelected(value);
+            }
+          },
         ),
       ],
     );
