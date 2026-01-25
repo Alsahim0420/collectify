@@ -8,44 +8,44 @@
 
 ---
 
-## ✨ Características Principales
+##  Características Principales
 
-### 🏠 **Gestión de Colecciones LEGO**
+###  **Gestión de Colecciones LEGO**
 - **Lista de sets LEGO** con diseño de tarjetas moderno
 - **Búsqueda y filtrado** de sets por nombre, tema o número
 - **Estados de carga** con indicadores visuales
 - **Navegación intuitiva** entre colecciones
 - **Logo Collectify** con icono de bloques LEGO
 
-### 📱 **Sistema de Temas Moderno**
+###  **Sistema de Temas Moderno**
 - **Temas adaptativos** que se ajustan al sistema
 - **Persistencia automática** usando Hive
 - **Transición suave** entre temas
 - **Adaptación automática** de todos los componentes
 - **Diseño Material Design 3**
 
-### 🔄 **Arquitectura Offline-First**
+###  **Arquitectura Offline-First**
 - **Carga instantánea** desde cache local (Hive)
 - **Datos persistentes** entre sesiones
 - **Funcionamiento completo** sin internet
 - **Almacenamiento local** seguro y rápido
 - **Sincronización** cuando hay conexión
 
-### 🧱 **Gestión Completa de Sets LEGO**
+###  **Gestión Completa de Sets LEGO**
 - **Información detallada** de cada set
 - **Número de serie** y tema del set
 - **Cantidad de piezas** y notas personales
 - **Fecha de adquisición** registrada
 - **Organización por colecciones**
 
-### 📊 **Estadísticas y Organización**
+###  **Estadísticas y Organización**
 - **Contador de sets** en tiempo real
 - **Estadísticas visuales** de la colección
 - **Organización por temas** (Star Wars, Technic, etc.)
 - **Búsqueda avanzada** por múltiples criterios
 - **Vista detallada** de cada set
 
-### 🎨 **Interfaz de Usuario Intuitiva**
+###  **Interfaz de Usuario Intuitiva**
 - **Diseño moderno** con Material Design 3
 - **Animaciones fluidas** y transiciones suaves
 - **Componentes reutilizables** y consistentes
@@ -54,22 +54,19 @@
 
 ---
 
-## 🖼️ Capturas de Pantalla
+##  Capturas de Pantalla
 
-![Tema Oscuro - Home](https://res.cloudinary.com/panmecar/image/upload/v1756281138/ATHLOS/Screenshot_20250827_024604_heqgdb.jpg)
+![Home](https://res.cloudinary.com/panmecar/image/upload/v1769379009/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.46.48_qbnour.png)
 
-![Tema Oscuro - Home](https://res.cloudinary.com/panmecar/image/upload/v1756281139/ATHLOS/Screenshot_20250827_024621_zrjzb1.jpg)
+![Detalle](https://res.cloudinary.com/panmecar/image/upload/v1769379009/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.47.26_viheue.png)
 
-![Tema Oscuro - Home](https://res.cloudinary.com/panmecar/image/upload/v1756281141/ATHLOS/Screenshot_20250827_024633_a4ej18.jpg)
+![Add](https://res.cloudinary.com/panmecar/image/upload/v1769379009/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.46.52_okbi5h.png)
 
-![Tema Oscuro - Home](https://res.cloudinary.com/panmecar/image/upload/v1756282208/ATHLOS/Screenshot_20250827_030942_pdxom6.jpg)
+![search](https://res.cloudinary.com/panmecar/image/upload/v1769379010/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.46.55_fee8se.png)
 
-![Detalle Ejercicio](https://res.cloudinary.com/panmecar/image/upload/v1756281143/ATHLOS/Screenshot_20250827_024903_rk9ohh.jpg)
+![search one](https://res.cloudinary.com/panmecar/image/upload/v1769379009/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.47.18_bpt7jq.png)
 
 
-![Perfil Usuario](https://res.cloudinary.com/panmecar/image/upload/v1756281144/ATHLOS/Screenshot_20250827_024908_pgyahq.jpg)
-
-![Tema Claro - Home](https://res.cloudinary.com/panmecar/image/upload/v1756281181/ATHLOS/Screenshot_20250827_024912_w4m8uv.jpg)
 
 
 
@@ -108,7 +105,7 @@ flutter run
 
 ---
 
-## 🛠️ Tecnologías y Arquitectura
+##  Tecnologías y Arquitectura
 
 ### **Frontend & UI**
 - **Flutter 3.32.8** - Framework principal 
@@ -144,7 +141,7 @@ flutter run
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+##  Arquitectura del Proyecto
 
 ### **Estructura de Carpetas**
 ```
@@ -180,7 +177,7 @@ lib/
 - **Dependency Injection** - Inyección de dependencias
 - **Atomic Design** - Componentes modulares
 
-### **🎨 Atomic Design - Sistema de Componentes**
+### ** Atomic Design - Sistema de Componentes**
 
 El proyecto utiliza **Atomic Design** para organizar los componentes de UI de manera jerárquica y escalable. Esta metodología divide los componentes en 5 niveles, desde los más simples hasta los más complejos.
 
@@ -193,7 +190,7 @@ Cada componente sigue una convención de nombres con prefijos que indican su niv
 - **`o_`** → **Organisms** (Organismos) - Combinaciones de moléculas y átomos
 - **`p_`** → **Pages** (Páginas) - Vistas completas de la aplicación
 
-#### **📦 Niveles de Atomic Design**
+#### ** Niveles de Atomic Design**
 
 ##### **1. Atoms (Átomos) - Prefijo `a_`**
 Los componentes más básicos e indivisibles de la interfaz. Son elementos simples que no pueden descomponerse más.
@@ -207,10 +204,10 @@ Los componentes más básicos e indivisibles de la interfaz. Son elementos simpl
 - `a_gap.dart` - Espaciador
 
 **Características:**
-- ✅ Componentes simples y reutilizables
-- ✅ Sin lógica de negocio compleja
-- ✅ Altamente reutilizables en toda la app
-- ✅ Props mínimas y bien definidas
+-  Componentes simples y reutilizables
+-  Sin lógica de negocio compleja
+-  Altamente reutilizables en toda la app
+-  Props mínimas y bien definidas
 
 ##### **2. Molecules (Moléculas) - Prefijo `m_`**
 Combinaciones de átomos que forman componentes más complejos pero aún relativamente simples.
@@ -223,10 +220,10 @@ Combinaciones de átomos que forman componentes más complejos pero aún relativ
 - `m_confirm_dialog.dart` - Diálogo de confirmación
 
 **Características:**
-- ✅ Combinan 2 o más átomos
-- ✅ Tienen una funcionalidad específica
-- ✅ Pueden tener estado local simple
-- ✅ Reutilizables en diferentes contextos
+-  Combinan 2 o más átomos
+-  Tienen una funcionalidad específica
+-  Pueden tener estado local simple
+-  Reutilizables en diferentes contextos
 
 ##### **3. Organisms (Organismos) - Prefijo `o_`**
 Combinaciones complejas de moléculas y átomos que forman secciones completas de la interfaz.
@@ -235,10 +232,10 @@ Combinaciones complejas de moléculas y átomos que forman secciones completas d
 - `o_search_section.dart` - Sección completa de búsqueda (combina `m_search_bar` + chips de búsquedas recientes)
 
 **Características:**
-- ✅ Combinan múltiples moléculas y átomos
-- ✅ Representan secciones completas de UI
-- ✅ Pueden tener lógica de estado más compleja
-- ✅ Menos reutilizables que moléculas
+-  Combinan múltiples moléculas y átomos
+-  Representan secciones completas de UI
+-  Pueden tener lógica de estado más compleja
+-  Menos reutilizables que moléculas
 
 ##### **4. Pages (Páginas) - Prefijo `p_`**
 Vistas completas de la aplicación que combinan organismos, moléculas y átomos para formar pantallas funcionales.
@@ -250,28 +247,28 @@ Vistas completas de la aplicación que combinan organismos, moléculas y átomos
 - `p_details_page.dart` - Página de detalles de un set
 
 **Características:**
-- ✅ Vistas completas y funcionales
-- ✅ Combinan múltiples organismos, moléculas y átomos
-- ✅ Conectan con la lógica de negocio (BLoC)
-- ✅ Manejan navegación y estado global
-- ✅ Únicas en la aplicación
+-  Vistas completas y funcionales
+-  Combinan múltiples organismos, moléculas y átomos
+-  Conectan con la lógica de negocio (BLoC)
+-  Manejan navegación y estado global
+-  Únicas en la aplicación
 
-#### **📋 Convenciones de Nomenclatura**
+#### ** Convenciones de Nomenclatura**
 
 ```
 lib/presentation/ui/
 ├── atoms/
-│   ├── a_text.dart              # ✅ Correcto
-│   └── text.dart                # ❌ Incorrecto (falta prefijo)
+│   ├── a_text.dart              #  Correcto
+│   └── text.dart                #  Incorrecto (falta prefijo)
 ├── molecules/
-│   ├── m_search_bar.dart        # ✅ Correcto
-│   └── search_bar.dart           # ❌ Incorrecto (falta prefijo)
+│   ├── m_search_bar.dart        #  Correcto
+│   └── search_bar.dart           #  Incorrecto (falta prefijo)
 ├── organisms/
-│   ├── o_search_section.dart    # ✅ Correcto
-│   └── search_section.dart       # ❌ Incorrecto (falta prefijo)
+│   ├── o_search_section.dart    #  Correcto
+│   └── search_section.dart       #  Incorrecto (falta prefijo)
 └── pages/
-    ├── p_home_page.dart          # ✅ Correcto
-    └── home_page.dart            # ❌ Incorrecto (falta prefijo)
+    ├── p_home_page.dart          #  Correcto
+    └── home_page.dart            #  Incorrecto (falta prefijo)
 ```
 
 #### **🔄 Flujo de Composición**
@@ -286,7 +283,7 @@ Organisms (o_) → Usan Molecules + Atoms
 Pages (p_) → Usan Organisms + Molecules + Atoms
 ```
 
-#### **💡 Beneficios de Atomic Design**
+#### ** Beneficios de Atomic Design**
 
 1. **Escalabilidad** - Fácil agregar nuevos componentes siguiendo la jerarquía
 2. **Reutilización** - Componentes atómicos reutilizables en múltiples contextos
@@ -295,7 +292,7 @@ Pages (p_) → Usan Organisms + Molecules + Atoms
 5. **Colaboración** - Fácil para equipos trabajar en paralelo
 6. **Testing** - Más fácil testear componentes pequeños y aislados
 
-#### **📝 Ejemplo Práctico**
+#### ** Ejemplo Práctico**
 
 ```dart
 // Atom (a_text.dart)
@@ -317,7 +314,7 @@ class HomePage extends StatelessWidget {
 
 ---
 
-## 🔧 Funcionalidades Técnicas
+##  Funcionalidades Técnicas
 
 ### **Gestión de Estado con BLoC**
 ```dart
@@ -393,7 +390,7 @@ final appRouter = GoRouter(
 
 ---
 
-## 🔒 Seguridad y Privacidad
+##  Seguridad y Privacidad
 
 ### **Almacenamiento Local Seguro**
 - **Hive** para almacenamiento local encriptado
@@ -409,7 +406,7 @@ final appRouter = GoRouter(
 
 ---
 
-## 🚀 Despliegue y Distribución
+##  Despliegue y Distribución
 
 ### **Build de Producción**
 ```bash
@@ -431,7 +428,7 @@ flutter build ios --release
 
 ---
 
-## 🧪 Testing y Calidad
+##  Testing y Calidad
 
 ### **Testing Unitario**
 - **Flutter Lints 5.0.0** - Reglas de calidad de código 
@@ -449,7 +446,7 @@ flutter build ios --release
 
 ---
 
-## 🤝 Contribución
+##  Contribución
 
 ### **Guidelines**
 1. **Fork** del repositorio
@@ -466,7 +463,7 @@ flutter build ios --release
 
 ---
 
-## 👨‍💻 Desarrollador
+##  Desarrollador
 
 **Desarrollado con 💙 por Pablo Melo**
 
