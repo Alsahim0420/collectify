@@ -1,7 +1,4 @@
 # 🧱 Collectify
-
-![Collectify](https://res.cloudinary.com/panmecar/image/upload/v1756281903/ATHLOS/ATHLOS_banner_billey_remake_gywqzz.png)
-
 ---
 
 **Collectify** es una aplicación móvil desarrollada en Flutter para gestionar y organizar colecciones de sets LEGO de manera inteligente, con funcionalidades offline-first y una experiencia de usuario moderna.
