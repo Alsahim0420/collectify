@@ -113,7 +113,7 @@ flutter run
 ### **Gestión de Estado**
 - **Flutter Bloc 8.1.6** - State management reactivo 
 - **Equatable 2.0.5** - Comparación de objetos
-- **Dartz 0.10.1** - Programación funcional
+- **Either propio** (`domain/types/either.dart`) - Resultado éxito/error sin dependencias externas
 - **Clean Architecture** - Separación de responsabilidades
 
 ### **Almacenamiento Local**
@@ -161,10 +161,10 @@ lib/
 └── presentation/                  # Capa de presentación
     ├── state/                     # Gestión de estado (BLoC)
     └── ui/                        # Interfaz de usuario
-        ├── atoms/                 # Componentes atómicos (prefijo: a_)
-        ├── molecules/             # Componentes moleculares (prefijo: m_)
-        ├── organisms/             # Componentes orgánicos (prefijo: o_)
-        └── pages/                 # Páginas de la aplicación (prefijo: p_)
+        ├── atoms/                 # Componentes atómicos
+        ├── molecules/             # Componentes moleculares
+        ├── organisms/             # Componentes orgánicos
+        └── pages/                 # Páginas de la aplicación
 ```
 
 ### **Patrón de Diseño**
@@ -180,25 +180,22 @@ El proyecto utiliza **Atomic Design** para organizar los componentes de UI de ma
 
 #### **Estructura de Nomenclatura**
 
-Cada componente sigue una convención de nombres con prefijos que indican su nivel en la jerarquía:
-
-- **`a_`** → **Atoms** (Átomos) - Componentes básicos e indivisibles
-- **`m_`** → **Molecules** (Moléculas) - Combinaciones de átomos
-- **`o_`** → **Organisms** (Organismos) - Combinaciones de moléculas y átomos
-- **`p_`** → **Pages** (Páginas) - Vistas completas de la aplicación
+**Regla de clean code:** el nombre del archivo debe ser igual al nombre de la clase en **snake_case**. La carpeta (atoms/, molecules/, etc.) indica el nivel en Atomic Design.
 
 #### ** Niveles de Atomic Design**
 
-##### **1. Atoms (Átomos) - Prefijo `a_`**
+##### **1. Atoms (Átomos)**
 Los componentes más básicos e indivisibles de la interfaz. Son elementos simples que no pueden descomponerse más.
 
 **Ejemplos en el proyecto:**
-- `a_text.dart` - Componente de texto reutilizable
-- `a_chip.dart` - Chip individual para etiquetas
-- `a_text_field.dart` - Campo de texto básico
-- `a_primary_button.dart` - Botón primario
-- `a_number_field.dart` - Campo numérico
-- `a_gap.dart` - Espaciador
+- `title.dart` → clase `Title`
+- `subtitle.dart` → clase `Subtitle`
+- `body.dart` → clase `Body`
+- `chip.dart` → clase `Chip`
+- `field_text.dart` → clase `FieldText`
+- `primary_button.dart` → clase `PrimaryButton`
+- `a_number_field.dart` → clase `ANumberField`
+- `a_gap.dart` → clase `AGap`
 
 **Características:**
 -  Componentes simples y reutilizables
@@ -206,15 +203,15 @@ Los componentes más básicos e indivisibles de la interfaz. Son elementos simpl
 -  Altamente reutilizables en toda la app
 -  Props mínimas y bien definidas
 
-##### **2. Molecules (Moléculas) - Prefijo `m_`**
+##### **2. Molecules (Moléculas)**
 Combinaciones de átomos que forman componentes más complejos pero aún relativamente simples.
 
 **Ejemplos en el proyecto:**
-- `m_search_bar.dart` - Barra de búsqueda (combina `a_text_field` + iconos)
-- `m_set_card.dart` - Tarjeta de set LEGO (combina múltiples átomos)
-- `m_category_selector.dart` - Selector de categorías (combina `a_chip` múltiples)
-- `m_lego_theme_selector.dart` - Selector de temas LEGO
-- `m_confirm_dialog.dart` - Diálogo de confirmación
+- `search_bar.dart` → clase `SearchBar`
+- `set_card.dart` → clase `SetCard`
+- `category_selector.dart` → clase `CategorySelector`
+- `lego_theme_selector.dart` → clase `LegoThemeSelector`
+- `confirm_dialog.dart` → clase `ConfirmDialog`
 
 **Características:**
 -  Combinan 2 o más átomos
@@ -222,11 +219,11 @@ Combinaciones de átomos que forman componentes más complejos pero aún relativ
 -  Pueden tener estado local simple
 -  Reutilizables en diferentes contextos
 
-##### **3. Organisms (Organismos) - Prefijo `o_`**
+##### **3. Organisms (Organismos)**
 Combinaciones complejas de moléculas y átomos que forman secciones completas de la interfaz.
 
 **Ejemplos en el proyecto:**
-- `o_search_section.dart` - Sección completa de búsqueda (combina `m_search_bar` + chips de búsquedas recientes)
+- `search_section.dart` → clase `SearchSection`
 
 **Características:**
 -  Combinan múltiples moléculas y átomos
@@ -234,14 +231,14 @@ Combinaciones complejas de moléculas y átomos que forman secciones completas d
 -  Pueden tener lógica de estado más compleja
 -  Menos reutilizables que moléculas
 
-##### **4. Pages (Páginas) - Prefijo `p_`**
+##### **4. Pages (Páginas)**
 Vistas completas de la aplicación que combinan organismos, moléculas y átomos para formar pantallas funcionales.
 
 **Ejemplos en el proyecto:**
-- `p_home_page.dart` - Página principal con lista de sets
-- `p_collections_page.dart` - Página de colecciones
-- `p_form_page.dart` - Página de formulario para agregar/editar sets
-- `p_details_page.dart` - Página de detalles de un set
+- `home_page.dart` → clase `HomePage`
+- `collections_page.dart` → clase `CollectionsPage`
+- `form_page.dart` → clase `FormPage`
+- `details_page.dart` → clase `DetailsPage`
 
 **Características:**
 -  Vistas completas y funcionales
@@ -252,32 +249,34 @@ Vistas completas de la aplicación que combinan organismos, moléculas y átomos
 
 #### ** Convenciones de Nomenclatura**
 
+**Archivo = nombre de clase en snake_case.** Ejemplo: clase `SetCard` → `set_card.dart`.
+
 ```
 lib/presentation/ui/
 ├── atoms/
-│   ├── a_text.dart              #  Correcto
-│   └── text.dart                #  Incorrecto (falta prefijo)
+│   ├── chip.dart                #  clase Chip
+│   ├── title.dart               #  clase Title
+│   └── primary_button.dart      #  clase PrimaryButton
 ├── molecules/
-│   ├── m_search_bar.dart        #  Correcto
-│   └── search_bar.dart           #  Incorrecto (falta prefijo)
+│   ├── search_bar.dart          #  clase SearchBar
+│   └── set_card.dart            #  clase SetCard
 ├── organisms/
-│   ├── o_search_section.dart    #  Correcto
-│   └── search_section.dart       #  Incorrecto (falta prefijo)
+│   └── search_section.dart      #  clase SearchSection
 └── pages/
-    ├── p_home_page.dart          #  Correcto
-    └── home_page.dart            #  Incorrecto (falta prefijo)
+    ├── home_page.dart           #  clase HomePage
+    └── form_page.dart           #  clase FormPage
 ```
 
 #### **🔄 Flujo de Composición**
 
 ```
-Atoms (a_) 
+Atoms 
     ↓
-Molecules (m_) → Usan Atoms
+Molecules → Usan Atoms
     ↓
-Organisms (o_) → Usan Molecules + Atoms
+Organisms → Usan Molecules + Atoms
     ↓
-Pages (p_) → Usan Organisms + Molecules + Atoms
+Pages → Usan Organisms + Molecules + Atoms
 ```
 
 #### ** Beneficios de Atomic Design**
@@ -292,18 +291,18 @@ Pages (p_) → Usan Organisms + Molecules + Atoms
 #### ** Ejemplo Práctico**
 
 ```dart
-// Atom (a_text.dart)
+// Atom (title.dart) - nombre archivo = nombre clase en snake_case
 class Title extends StatelessWidget {
   final String text;
   // ...
 }
 
-// Molecule (m_set_card.dart) - Usa átomos
+// Molecule (set_card.dart) - Usa átomos
 class SetCard extends StatelessWidget {
   // Usa: Title, Chip, Icon, etc.
 }
 
-// Page (p_home_page.dart) - Usa moléculas y organismos
+// Page (home_page.dart) - Usa moléculas y organismos
 class HomePage extends StatelessWidget {
   // Usa: SetCard, SearchSection, etc.
 }

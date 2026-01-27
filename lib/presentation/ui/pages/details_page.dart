@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
 import 'package:collectify/presentation/state/collection/collection_state.dart';
-import 'package:collectify/presentation/ui/pages/p_form_page.dart';
+import 'package:collectify/presentation/ui/pages/form_page.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key, required this.itemId});

@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:collectify/domain/types/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:collectify/domain/entities/lego_set.dart';

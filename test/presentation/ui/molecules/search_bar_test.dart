@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:collectify/presentation/ui/molecules/m_search_bar.dart' as collectify;
+import 'package:collectify/presentation/ui/molecules/search_bar.dart' as collectify;
 
 void main() {
   testWidgets('SearchBar debería mostrar el label correctamente',

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
-import 'package:collectify/presentation/ui/molecules/m_lego_theme_selector.dart';
+import 'package:collectify/presentation/ui/molecules/lego_theme_selector.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key, this.existingSet});

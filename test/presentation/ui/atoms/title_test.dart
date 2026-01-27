@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Title;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:collectify/presentation/ui/atoms/a_text.dart' as collectify;
+import 'package:collectify/presentation/ui/atoms/title.dart';
+import 'package:collectify/presentation/ui/atoms/subtitle.dart';
+import 'package:collectify/presentation/ui/atoms/body.dart';
 
 void main() {
   testWidgets('Title debería mostrar el texto correctamente', (tester) async {
@@ -10,7 +12,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Title(text)),
+        home: Scaffold(body: Title(text)),
       ),
     );
 
@@ -26,7 +28,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Title(text, color: color)),
+        home: Scaffold(body: Title(text, color: color)),
       ),
     );
 
@@ -42,7 +44,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Subtitle(text)),
+        home: Scaffold(body: Subtitle(text)),
       ),
     );
 
@@ -58,7 +60,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Subtitle(text, color: color)),
+        home: Scaffold(body: Subtitle(text, color: color)),
       ),
     );
 
@@ -74,7 +76,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Body(text)),
+        home: Scaffold(body: Body(text)),
       ),
     );
 
@@ -90,7 +92,7 @@ void main() {
     // Act
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: collectify.Body(text, color: color)),
+        home: Scaffold(body: Body(text, color: color)),
       ),
     );
 
@@ -107,7 +109,7 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: collectify.Title(text, textAlign: TextAlign.center),
+          body: Title(text, textAlign: TextAlign.center),
         ),
       ),
     );

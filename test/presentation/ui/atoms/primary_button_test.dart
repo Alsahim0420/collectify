@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:collectify/presentation/ui/atoms/a_primary_button.dart';
+import 'package:collectify/presentation/ui/atoms/primary_button.dart';
 
 void main() {
   testWidgets('PrimaryButton debería mostrar el label correctamente',

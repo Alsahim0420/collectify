@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:collectify/data/datasources/lego_local_ds.dart';
-import 'package:collectify/data/datasources/lego_hive_ds.dart';
+import 'package:collectify/data/datasources/lego_local_datasource.dart';
+import 'package:collectify/data/datasources/hive_lego_local_data_source.dart';
 import 'package:collectify/data/datasources/collection_local_datasource_impl.dart';
 import 'package:collectify/data/datasources/collection_local_datasource.dart';
 import 'package:collectify/data/repositories_impl/lego_repository_impl.dart';

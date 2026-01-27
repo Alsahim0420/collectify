@@ -1,8 +1,8 @@
-import 'package:dartz/dartz.dart';
+import 'package:collectify/data/datasources/collection_local_datasource.dart';
 import 'package:collectify/domain/entities/collection.dart';
 import 'package:collectify/domain/failures/failures.dart';
 import 'package:collectify/domain/repositories/collection_repository.dart';
-import 'package:collectify/data/datasources/collection_local_datasource.dart';
+import 'package:collectify/domain/types/either.dart';
 
 class CollectionRepositoryImpl implements CollectionRepository {
   const CollectionRepositoryImpl(this._localDataSource);

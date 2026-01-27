@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:collectify/data/models/lego_set_model.dart';
-import 'package:collectify/data/datasources/lego_local_ds.dart';
+import 'package:collectify/data/datasources/lego_local_datasource.dart';
 import 'package:collectify/data/adapters/lego_set_adapter.dart';
 
 class HiveLegoLocalDataSource implements LegoLocalDataSource {

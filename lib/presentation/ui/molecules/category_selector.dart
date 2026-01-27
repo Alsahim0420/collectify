@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide Chip;
-import 'package:collectify/presentation/ui/atoms/a_chip.dart';
+import 'package:collectify/presentation/ui/atoms/chip.dart';
 
 class CategorySelector extends StatelessWidget {
   const CategorySelector({

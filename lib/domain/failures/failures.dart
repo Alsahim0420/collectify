@@ -8,7 +8,7 @@ class NotFoundFailure extends Failure {
 }
 
 class UnexpectedFailure extends Failure {
-  const UnexpectedFailure([super.m = 'Error inesperado']);
+  const UnexpectedFailure([super.message = 'Error inesperado']);
 }
 
 class ValidationFailure extends Failure {

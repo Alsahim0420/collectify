@@ -1,9 +1,9 @@
-import 'package:dartz/dartz.dart';
+import 'package:collectify/data/datasources/lego_local_datasource.dart';
+import 'package:collectify/data/models/lego_set_model.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
 import 'package:collectify/domain/failures/failures.dart';
 import 'package:collectify/domain/repositories/lego_repository.dart';
-import 'package:collectify/data/datasources/lego_local_ds.dart';
-import 'package:collectify/data/models/lego_set_model.dart';
+import 'package:collectify/domain/types/either.dart';
 
 class LegoRepositoryImpl implements LegoRepository {
   LegoRepositoryImpl(this.local);
