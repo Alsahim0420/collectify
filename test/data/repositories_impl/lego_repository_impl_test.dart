@@ -1,7 +1,7 @@
-import 'package:dartz/dartz.dart';
+import 'package:collectify/domain/types/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:collectify/data/datasources/lego_local_ds.dart';
+import 'package:collectify/data/datasources/lego_local_datasource.dart';
 import 'package:collectify/data/models/lego_set_model.dart';
 import 'package:collectify/data/repositories_impl/lego_repository_impl.dart';
 import 'package:collectify/domain/entities/lego_set.dart';

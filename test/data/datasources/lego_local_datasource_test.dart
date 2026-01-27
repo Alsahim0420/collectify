@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:collectify/data/datasources/lego_local_ds.dart';
+import 'package:collectify/data/datasources/lego_local_datasource.dart';
 import 'package:collectify/data/models/lego_set_model.dart';
 
 void main() {

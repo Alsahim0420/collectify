@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:collectify/presentation/ui/pages/p_home_page.dart';
-import 'package:collectify/presentation/ui/pages/p_form_page.dart';
-import 'package:collectify/presentation/ui/pages/p_details_page.dart';
-import 'package:collectify/presentation/ui/pages/p_collections_page.dart';
+import 'package:collectify/presentation/ui/pages/home_page.dart';
+import 'package:collectify/presentation/ui/pages/form_page.dart';
+import 'package:collectify/presentation/ui/pages/details_page.dart';
+import 'package:collectify/presentation/ui/pages/collections_page.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',

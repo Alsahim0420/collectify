@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:collectify/domain/types/either.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
@@ -11,6 +11,19 @@ class MockLegoRepository extends Mock implements LegoRepository {}
 void main() {
   late AddLegoSet usecase;
   late MockLegoRepository mockRepository;
+
+  setUpAll(() {
+    registerFallbackValue(LegoSet(
+      id: '',
+      name: '',
+      setNumber: 0,
+      theme: '',
+      pieces: 0,
+      notes: '',
+      acquiredAt: DateTime.now(),
+      collectionId: '',
+    ));
+  });
 
   setUp(() {
     mockRepository = MockLegoRepository();

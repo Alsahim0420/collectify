@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide SearchBar, Chip;
-import 'package:collectify/presentation/ui/molecules/m_search_bar.dart';
-import 'package:collectify/presentation/ui/atoms/a_chip.dart';
+import 'package:collectify/presentation/ui/molecules/search_bar.dart';
+import 'package:collectify/presentation/ui/atoms/chip.dart';
 
 class SearchSection extends StatelessWidget {
   const SearchSection({

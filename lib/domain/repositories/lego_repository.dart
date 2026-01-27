@@ -1,6 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
 import 'package:collectify/domain/failures/failures.dart';
+import 'package:collectify/domain/types/either.dart';
 
 abstract class LegoRepository {
   Future<Either<Failure, List<LegoSet>>> getSets();

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart' hide Title, Chip;
 import 'package:collectify/domain/entities/lego_set.dart';
-import 'package:collectify/presentation/ui/atoms/a_text.dart';
-import 'package:collectify/presentation/ui/atoms/a_chip.dart';
+import 'package:collectify/presentation/ui/atoms/title.dart';
+import 'package:collectify/presentation/ui/atoms/subtitle.dart';
+import 'package:collectify/presentation/ui/atoms/body.dart';
+import 'package:collectify/presentation/ui/atoms/chip.dart';
 
 class SetCard extends StatelessWidget {
   const SetCard({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:collectify/domain/entities/lego_set.dart';
-import 'package:collectify/presentation/ui/molecules/m_set_card.dart';
+import 'package:collectify/presentation/ui/molecules/set_card.dart';
 
 void main() {
   final tLegoSet = LegoSet(

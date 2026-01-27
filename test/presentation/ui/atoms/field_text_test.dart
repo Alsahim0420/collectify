@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:collectify/presentation/ui/atoms/a_text_field.dart';
+import 'package:collectify/presentation/ui/atoms/field_text.dart';
 
 void main() {
   testWidgets('FieldText debería mostrar el label correctamente',

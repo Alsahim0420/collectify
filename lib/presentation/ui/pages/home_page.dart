@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:collectify/presentation/state/collection/collection_bloc.dart';
 import 'package:collectify/presentation/state/collection/collection_event.dart';
 import 'package:collectify/presentation/state/collection/collection_state.dart';
-import 'package:collectify/presentation/ui/pages/p_form_page.dart';
-import 'package:collectify/presentation/ui/pages/p_details_page.dart';
-import 'package:collectify/presentation/ui/molecules/m_set_card.dart';
-import 'package:collectify/presentation/ui/atoms/a_text.dart';
-import 'package:collectify/presentation/ui/atoms/a_primary_button.dart';
+import 'package:collectify/presentation/ui/pages/form_page.dart';
+import 'package:collectify/presentation/ui/pages/details_page.dart';
+import 'package:collectify/presentation/ui/molecules/set_card.dart';
+import 'package:collectify/presentation/ui/atoms/title.dart';
+import 'package:collectify/presentation/ui/atoms/subtitle.dart';
+import 'package:collectify/presentation/ui/atoms/body.dart';
+import 'package:collectify/presentation/ui/atoms/primary_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.selectedCollectionId});

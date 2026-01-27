@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide TextField;
-import 'package:collectify/presentation/ui/atoms/a_text_field.dart';
+import 'package:collectify/presentation/ui/atoms/field_text.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
