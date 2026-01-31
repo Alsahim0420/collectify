@@ -63,6 +63,12 @@
 
 ![search one](https://res.cloudinary.com/panmecar/image/upload/v1769379009/fase%201/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-01-25_at_16.47.18_bpt7jq.png)
 
+---
+
+##  Tests
+
+<!-- Reemplaza la ruta por tu imagen (ej: captura del terminal, reporte de cobertura, etc.) -->
+![Resultados de tests](https://res.cloudinary.com/panmecar/image/upload/v1769844331/test_fase1/Captura_de_pantalla_2026-01-31_a_la_s_2.25.22_a.m._pyt6yx.png)
 
 
 

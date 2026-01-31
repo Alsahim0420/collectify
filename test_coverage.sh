@@ -47,12 +47,14 @@ if [ -f "coverage/lcov.info" ]; then
     echo "📈 Resumen de cobertura:"
     lcov --summary coverage/lcov.info.cleaned
     
-    # Verificar que la cobertura sea mayor al 80%
+    # Verificar que la cobertura sea mayor al 80% (falla si no se cumple)
     COVERAGE=$(lcov --summary coverage/lcov.info.cleaned 2>&1 | grep -oP '\d+\.\d+%' | head -1 | sed 's/%//')
-    if (( $(echo "$COVERAGE >= 80" | bc -l) )); then
-        echo "✅ Cobertura de tests: ${COVERAGE}% (objetivo: >= 80%)"
+    MIN_COVERAGE=80
+    if (( $(echo "$COVERAGE >= $MIN_COVERAGE" | bc -l) )); then
+        echo "✅ Cobertura de tests: ${COVERAGE}% (objetivo: >= ${MIN_COVERAGE}%)"
     else
-        echo "⚠️  Cobertura de tests: ${COVERAGE}% (objetivo: >= 80%)"
+        echo "❌ Cobertura de tests: ${COVERAGE}% (objetivo: >= ${MIN_COVERAGE}%)"
+        exit 1
     fi
 else
     echo "❌ No se encontró el archivo coverage/lcov.info"
